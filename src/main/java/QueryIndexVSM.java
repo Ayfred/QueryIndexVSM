@@ -17,16 +17,13 @@ import java.nio.file.Paths;
 public class QueryIndexVSM {
 
     public static void main(String[] args) throws Exception {
-        String indexDir = "src/main/resources/index";
-        String queryFile ="src/main/resources/data/cran.qry";
+        String indexDir = "../index";
+        String queryFile ="../cran.qry";
         int MAX_RESULTS = 50;
 
         // Initialize the IndexSearcher and Analyzer
         FSDirectory indexx = FSDirectory.open(Paths.get(indexDir));
         IndexSearcher isearcher = new IndexSearcher(DirectoryReader.open(indexx));
-
-        //isearcher.setSimilarity(new BM25Similarity());
-        // TFIDFS Similarity
 
         isearcher.setSimilarity(new ClassicSimilarity());
 
