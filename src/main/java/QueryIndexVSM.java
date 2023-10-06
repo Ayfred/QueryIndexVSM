@@ -12,6 +12,7 @@ import org.apache.lucene.search.similarities.ClassicSimilarity;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.nio.file.Paths;
 
 public class QueryIndexVSM {
@@ -19,6 +20,8 @@ public class QueryIndexVSM {
     public static void main(String[] args) throws Exception {
         String indexDir = "../index";
         String queryFile ="../cran.qry";
+        String saveFileTxtname ="../result.txt";
+
         int MAX_RESULTS = 50;
 
         // Initialize the IndexSearcher and Analyzer
@@ -38,6 +41,9 @@ public class QueryIndexVSM {
             StringBuilder content = new StringBuilder();
             int count = 0;
 
+            //Save results in a txt file
+            FileWriter writer = new FileWriter(saveFileTxtname);
+
             while ((line = bufferedReader.readLine()) != null) {
 
                 if (line.startsWith(".I")) {
@@ -48,16 +54,25 @@ public class QueryIndexVSM {
                             queryString = queryString.replace("?", "");
                         }
 
+/*
                         System.out.println("Query: " + queryString);
+*/
 
                         // Parse the query and search for documents
                         Query query = parser.parse(queryString);
                         ScoreDoc[] hits = isearcher.search(query, MAX_RESULTS).scoreDocs; // Get the set of results from the searcher
 
+/*
                         System.out.println("Documents: " + hits.length);
+*/
                         for (int i = 0; i < hits.length; i++) {
                             Document hitDoc = isearcher.doc(hits[i].doc);
+/*
                             System.out.println(i + ") " + index + " " + hits[i].score);
+*/
+
+                            writer.write(i + " " + index + " " + hits[i].score + "\n");
+
                         }
 
                         content = new StringBuilder(); // reset the content
@@ -80,17 +95,25 @@ public class QueryIndexVSM {
                     queryString = queryString.replace("?", "");
                 }
 
+/*
                 System.out.println("Query: " + queryString);
+*/
 
                 // Parse the query and search for documents
                 Query query = parser.parse(queryString);
                 ScoreDoc[] hits = isearcher.search(query, MAX_RESULTS).scoreDocs;
 
 
+/*
                 System.out.println("Documents: " + hits.length);
+*/
                 for (int i = 0; i < hits.length; i++) {
                     Document hitDoc = isearcher.doc(hits[i].doc);
+/*
                     System.out.println(i + ") " + index + " " + hits[i].score);
+*/
+                    writer.write(i + " " + index + " " + hits[i].score + "\n");
+
 
                 }
 
