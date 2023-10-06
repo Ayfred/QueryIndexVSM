@@ -36,10 +36,12 @@ public class QueryIndexVSM {
             String line;
             String index = null;
             StringBuilder content = new StringBuilder();
+            int count = 0;
 
             while ((line = bufferedReader.readLine()) != null) {
 
                 if (line.startsWith(".I")) {
+                    count++;
                     if (index != null) {
                         String queryString = content.toString().trim(); // trim leading and trailing whitespace from the query
                         if (queryString.contains("?")) { // remove the question mark if it exists
@@ -61,7 +63,8 @@ public class QueryIndexVSM {
                         content = new StringBuilder(); // reset the content
                     }
 
-                    index = line.substring(3);// get the index
+                    index = String.valueOf(count);
+                    //index = line.substring(3);// get the index
                 } else if (line.startsWith(".W")) {// Skip the ".W" line
                     // Skip the ".W" line
                 } else {
