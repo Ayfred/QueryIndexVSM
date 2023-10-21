@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f80f5389-3971-4d86-8a04-87f621c58d00" name="Changes" comment="fix index numbers">
+    <list default="true" id="f80f5389-3971-4d86-8a04-87f621c58d00" name="Changes" comment="save results txt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/QueryIndexVSM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/QueryIndexVSM.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +56,11 @@
       <option name="presentableId" value="Default" />
       <updated>1696599409316</updated>
       <workItem from="1696599411665" duration="1626000" />
-      <workItem from="1696606138391" duration="797000" />
+      <workItem from="1696606138391" duration="1601000" />
+      <workItem from="1697023810229" duration="1116000" />
+      <workItem from="1697052171017" duration="1395000" />
+      <workItem from="1697056646476" duration="124000" />
+      <workItem from="1697057565059" duration="2013000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -91,7 +94,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696606188527</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="save results txt">
+      <option name="closed" value="true" />
+      <created>1696632481424</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1696632481424</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,6 +112,7 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="fix folder location" />
     <MESSAGE value="fix index numbers" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix index numbers" />
+    <MESSAGE value="save results txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="save results txt" />
   </component>
 </project>
