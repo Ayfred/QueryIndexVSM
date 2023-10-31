@@ -17,6 +17,7 @@ public class QueryIndex {
 
     public static void main(String[] args) throws Exception {
 
+        // Check if the required arguments were provided
         if (args.length < 1) {
             System.err.println("Usage: java -jar file.jar AnalyzerClassName");
             System.exit(1);
@@ -25,22 +26,24 @@ public class QueryIndex {
 /*        String indexDir = "src/main/resources/index";
         String queryFile = "src/main/resources/data/cran.qry";
         String saveFileTxtname = "src/main/resources/save/result.txt";*/
+
+        // Default similarity class name
         String similarityClassName = "org.apache.lucene.search.similarities.BM25Similarity";
 
-
+        // Default index and query file paths
         String indexDir = "../index";
         String queryFile ="../cran.qry";
         String saveFileTxtname ="../results";
 
-
+        // Get the analyzer class name from the command line
         String analyzerClassName = args[0];
 
-        //String analyzerClassName = "org.apache.lucene.analysis.en.EnglishAnalyzer";
-
+        // Get the similarity class name from the command line
         if (args.length == 2) {
             similarityClassName = args[1];
         }
 
+        // The maximum number of results to display
         int MAX_RESULTS = 50;
 
         // Initialize the IndexSearcher and Analyzer
@@ -61,6 +64,7 @@ public class QueryIndex {
         // Create a QueryParser for your specific field
         QueryParser parser = new QueryParser("content", analyzer);
 
+        // Read the queries from the file line by line
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(queryFile))) {
             String line;
             String index = null;
@@ -71,6 +75,7 @@ public class QueryIndex {
             FileWriter writer = new FileWriter(saveFileTxtname);
             while ((line = bufferedReader.readLine()) != null) {
 
+                // If the line starts with ".I", then it is the start of a new query
                 if (line.startsWith(".I")) {
                     count++;
 
@@ -86,11 +91,13 @@ public class QueryIndex {
 
                         int rank = 0;
                         for (int i = 0; i < hits.length; i++) {
-                            Document hitDoc = isearcher.doc(hits[i].doc);
-                            String docId = hitDoc.get("index-ID");
+                            Document hitDoc = isearcher.doc(hits[i].doc); // Get the document from the set of results
+                            String docId = hitDoc.get("index-ID"); // Get the document ID
 
+                            // Increment the rank
                             rank++;
 
+                            // Write the results to the file
                             writer.write(index
                                     + " " + "QO"
                                     + " " + docId
@@ -101,13 +108,13 @@ public class QueryIndex {
 
                         }
 
+                        // Reset the index and content
                         content = new StringBuilder(); // reset the content
                     }
-
+                    // Get the index of the query
                     index = String.valueOf(count);
                     //index = String.valueOf(Integer.parseInt(line.substring(3)));// get the index
                 } else if (line.startsWith(".W")) {// Skip the ".W" line
-                    // Skip the ".W" line
                 } else {
                     // Append the content lines
                     content.append(line).append(" ");
@@ -144,6 +151,12 @@ public class QueryIndex {
         }
     }
 
+    /**
+     * Create an instance of the similarity class
+     * @param similarityClassName The name of the similarity class
+     * @return An instance of the similarity class
+     * @throws Exception If the class cannot be found or instantiated
+     */
     private static Similarity createSimilarityInstance(String similarityClassName) throws Exception {
         Class<?> similarityClass = Class.forName(similarityClassName);
         return (Similarity) similarityClass.newInstance();
